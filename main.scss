@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+
+//set breakpoint sizes
+$break-small: 20em;
+$break-medium: 35em;
+$break-large: 64em;
+
+//colors
+$first-palette-color: #FAEBD7;
+$second-palette-color: #6495ED;
+$third-palette-color: #DEB887;
+$last-palette-color: white;
+$post-date-color: gray;
+
+//mixins
+@mixin breakpoint($break) {
+    @if $break==large {
+        @media (min-width: $break-large) {
+            @content;
+        }
+    }
+
+    @else if $break==medium {
+        @media (min-width: $break-medium) {
+            @content;
+        }
+    }
+
+    @else if $break==small {
+        @media (min-width: $break-small) {
+            @content;
+        }
+    }
+
+    @else {
+        @media ($break) {
+            @content;
+        }
+    }
+}
+
+@mixin shadoweffect ($shadow: 0 4px 8px 0 #000000a1){
+    -webkit-box-shadow: $shadow;
+    box-shadow: $shadow;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    margin: auto;
+    background-color: $first-palette-color;
+
+    a:link,
+    a:visited {
+        color: $second-palette-color;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    a:active {
+        color: $third-palette-color;
+    }
+
+    h1,
+    h2,
+    h3 {
+        font-family: Lora;
+    }
+
+    figure {
+        text-align: center;
+    }
+
+    div {
+        @include breakpoint(medium) {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-gap: 15px;
+        }
+    }
+
+    header {
+        color: $first-palette-color;
+        background-color: $second-palette-color;
+        text-align: right;
+        padding: 15px;
+
+        @include breakpoint(medium) {
+            grid-column-start: 1;
+            grid-column-end: 2;
+        }
+
+    }
+
+    main {
+        background-color: $first-palette-color;
+
+        @include breakpoint(medium) {
+            grid-column: 2/ span end;
+            margin: auto;
+        }
+
+    }
+
+}
+
+h1 {
+
+    a:link,
+    a:visited,
+    a:hover {
+        color: $first-palette-color;
+        text-decoration: none;
+    }
+}
+
+ul {
+    list-style-type: none;
+
+    li {
+        padding: 5px;
+
+        a:link,
+        a:visited {
+            color: $first-palette-color;
+            text-decoration: none;
+
+        }
+
+        a:hover {
+            color: $last-palette-color;
+            text-decoration: underline;
+        }
+
+        a:active {
+            color: $third-palette-color;
+        }
+    }
+
+}
+
+
+h2 {
+
+    a:link,
+    a:visited {
+        color: black;
+        text-decoration: none;
+
+    }
+
+    a:hover {
+        color: $second-palette-color;
+        text-decoration: underline;
+    }
+
+    a:active {
+        color: $third-palette-color;
+    }
+}
+
+article {
+    padding: 30px;
+    background: $last-palette-color;
+    margin: 25px;
+    @include shadoweffect();
+   // box-shadow: 0 4px 8px 0 #3333, 0 6px 20px 0 rgb(0, 0, 0);
+
+    img {
+        width: 100%;
+
+        @media (min-width: $break-large) {
+            & {
+                width: 40% !important;
+            }
+        }
+    }
+
+
+    h2 {
+        margin-bottom: 50px;
+    }
+
+    @media (min-width: $break-medium) {
+        & {
+            margin: 25px 65px 25px;
+        }
+
+        img {
+            width: 70%;
+        }
+    }
+}
+
+
+div.post-date {
+    color: $post-date-color;
+}
